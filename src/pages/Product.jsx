@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
-
 import { Footer, Navbar } from "../components";
 
 const Product = () => {
@@ -79,39 +78,43 @@ const Product = () => {
     </div>
   );
 
-  const ShowProduct = () => (
-    <div className="container my-5 py-2">
-      <div className="row">
-        <div className="col-md-6 col-sm-12 py-3">
-          <img
-            className="img-fluid"
-            src={product.image}
-            alt={product.title}
-            width="400px"
-            height="400px"
-          />
-        </div>
-        <div className="col-md-6 col-md-6 py-5">
-          <h4 className="text-uppercase text-muted">{product.category}</h4>
-          <h1 className="display-5">{product.title}</h1>
-          <p className="lead">
-            {product.rating?.rate} <i className="fa fa-star"></i>
-          </p>
-          <h3 className="display-6 my-4">${product.price}</h3>
-          <p className="lead">{product.description}</p>
-          <button
-            className="btn btn-outline-dark"
-            onClick={() => addProduct(product)}
-          >
-            Add to Cart
-          </button>
-          <Link to="/cart" className="btn btn-dark mx-3">
-            Go to Cart
-          </Link>
+  const ShowProduct = () => {
+    const { title, category, image, description, rating, price } = product;
+
+    return (
+      <div className="container my-5 py-2">
+        <div className="row">
+          <div className="col-md-6 col-sm-12 py-3">
+            <img
+              className="img-fluid"
+              src={image}
+              alt={title}
+              width="400px"
+              height="400px"
+            />
+          </div>
+          <div className="col-md-6 col-md-6 py-5">
+            <h4 className="text-uppercase text-muted">{category}</h4>
+            <h1 className="display-5">{title}</h1>
+            <p className="lead">
+              {rating?.rate} <i className="fa fa-star"></i>
+            </p>
+            <h3 className="display-6 my-4">${price}</h3>
+            <p className="lead">{description}</p>
+            <button
+              className="btn btn-outline-dark"
+              onClick={() => addProduct(product)}
+            >
+              Add to Cart
+            </button>
+            <Link to="/cart" className="btn btn-dark mx-3">
+              Go to Cart
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const Loading2 = () => (
     <div className="my-4 py-4">
